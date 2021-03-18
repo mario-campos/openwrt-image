@@ -18,7 +18,7 @@ $(OPENWRT_DIR): $(OPENWRT_TAR)
 	tar x -Jf $(OPENWRT_TAR)
 
 $(OPENWRT_TAR):
-	wget -q https://github.com/mario-campos/homelab/releases/download/openwrt-imagebuilder-$(OPENWRT_VERSION)/openwrt-imagebuilder-$(OPENWRT_VERSION)-$(OPENWRT_TARGET1)-$(OPENWRT_TARGET2).Linux-x86_64.tar.xz
+	wget -q https://github.com/mario-campos/openwrt-image/releases/download/$(OPENWRT_DIR)/$(OPENWRT_TAR)
 
 .PHONY: distclean
 distclean:
