@@ -44,5 +44,5 @@ install: $(OPENWRT_BIN) $(UNIFI_BIN)
 	sshpass -e scp "$(OPENWRT_BIN_PATH)/$(OPENWRT_BIN)" $(UNIFI_USER)@$(UNIFI_HOST):/tmp/openwrt.bin
 	echo mtd write /tmp/openwrt.bin kernel0 | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST)
 	echo mtd erase kernel1 | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST)
-	echo 'dd bs=1 count=1 if=/dev/zero of=/dev/$$(awk "/bs/ { split(\$$0, a, ":"); print a[1] }" </proc/mtd)' | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST)
+	echo 'dd bs=1 count=1 if=/dev/zero of=/dev/$$(awk "/bs/ { split(\$$0, a, \":\"); print a[1] }" </proc/mtd)' | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST)
 	echo reboot | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST)
