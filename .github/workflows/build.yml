@@ -13,8 +13,8 @@ jobs:
           sudo apt list --installed
       - name: Install Dependencies
         run: |
-          sudo apt update
-          sudo apt install \
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends \
             ccache \
             ecj \
             fastjar \
