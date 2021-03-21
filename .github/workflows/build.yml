@@ -18,14 +18,9 @@ jobs:
             ccache \
             ecj \
             fastjar \
-            gawk \
             gettext \
             java-propose-classpath \
             libelf-dev \
             libncurses5-dev \
             libncursesw5-dev \
-            libssl-dev \
-            python3-distutils \
-            python3-setuptools \
-            xsltproc \
-            zlib1g-dev 
+            xsltproc
