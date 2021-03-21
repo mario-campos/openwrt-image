@@ -3,8 +3,7 @@ OPENWRT_BIN_FACTORY = openwrt/bin/targets/ath79/generic/*-factory.bin
 OPENWRT_BIN_UPGRADE = openwrt/bin/targets/ath79/generic/*-sysupgrade.bin
 
 $(OPENWRT_BIN_FACTORY) $(OPENWRT_BIN_UPGRADE): diffconfig
-	git clone --depth 1 https://git.openwrt.org/openwrt/openwrt.git
-	cd openwrt; git fetch --tags; git checkout $(OPENWRT_TAG)
+	git clone -b "$(OPENWRT_TAG)" --depth 1 https://git.openwrt.org/openwrt/openwrt.git
 	cp diffconfig openwrt/.config
 	$(MAKE) -C openwrt defconfig
 	$(MAKE) -C openwrt download
