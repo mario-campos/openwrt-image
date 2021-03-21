@@ -1,7 +1,8 @@
-OPENWRT_TAG = v19.0.7
-OPENWRT_BIN = openwrt/bin/targets/ath79/generic/foo-factory.bin
+OPENWRT_TAG = v19.07.6
+OPENWRT_BIN_FACTORY = openwrt/bin/targets/ath79/generic/*-factory.bin
+OPENWRT_BIN_UPGRADE = openwrt/bin/targets/ath79/generic/*-sysupgrade.bin
 
-$(OPENWRT_BIN): diffconfig
+$(OPENWRT_BIN_FACTORY) $(OPENWRT_BIN_UPGRADE): diffconfig
 	git clone --depth 1 https://git.openwrt.org/openwrt/openwrt.git
 	cd openwrt; git fetch --no-tags origin $(OPENWRT_TAG); git checkout $(OPENWRT_TAG)
 	cp diffconfig openwrt/.config
@@ -26,11 +27,11 @@ UNIFI_PASS = ubnt
 UNIFI_BIN = ubnt-unifi-3.7.58.bin
 
 .PHONY: install
-install: $(OPENWRT_BIN) $(UNIFI_BIN)
+install: $(OPENWRT_BIN_FACTORY) $(UNIFI_BIN)
 	export SSHPASS="$(UNIFI_PASS)" ;\
 	sshpass -e scp "$(UNIFI_BIN)" $(UNIFI_USER)@$(UNIFI_HOST):/tmp/ubnt.bin ;\
 	echo fwupdate.real -m /tmp/ubnt.bin | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST) ;\
-	sshpass -e scp "$(OPENWRT_BIN_PATH)/$(OPENWRT_BIN)" $(UNIFI_USER)@$(UNIFI_HOST):/tmp/openwrt.bin ;\
+	sshpass -e scp "$(OPENWRT_BIN_FACTORY)" $(UNIFI_USER)@$(UNIFI_HOST):/tmp/openwrt.bin ;\
 	echo mtd write /tmp/openwrt.bin kernel0 | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST) ;\
 	echo mtd erase kernel1 | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST) ;\
 	echo 'dd bs=1 count=1 if=/dev/zero of=/dev/$$(awk "/bs/ { split(\$$0, a, \":\"); print a[1] }" </proc/mtd)' | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST) ;\
