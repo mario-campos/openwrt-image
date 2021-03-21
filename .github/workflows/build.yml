@@ -22,4 +22,12 @@ jobs:
             libncurses5-dev \
             libncursesw5-dev \
             xsltproc
-      - run: make
+      - id: make
+        run: |
+          make
+          echo '::set-output name=name::openwrt-image'
+          echo '::set-output name=path::openwrt/bin/targets/ath79/generic/'
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.make.outputs.name }}
+          path: ${{ steps.make.outputs.path }}
