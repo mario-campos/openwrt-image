@@ -1,40 +1,29 @@
-OPENWRT_PROFILE = ubnt_unifiac-lite
-OPENWRT_VERSION = 19.07.3
-OPENWRT_TARGET1 = ath79
-OPENWRT_TARGET2 = generic
+OPENWRT_TAG = v19.0.7
+OPENWRT_BIN = openwrt/bin/targets/ath79/generic/foo-factory.bin
 
-OPENWRT_DIR = openwrt-imagebuilder-$(OPENWRT_VERSION)-$(OPENWRT_TARGET1)-$(OPENWRT_TARGET2).Linux-x86_64
-OPENWRT_TAR = $(OPENWRT_DIR).tar.xz
-OPENWRT_BIN = openwrt-$(OPENWRT_VERSION)-$(OPENWRT_TARGET1)-$(OPENWRT_TARGET2)-$(OPENWRT_PROFILE)-squashfs-sysupgrade.bin
-OPENWRT_BIN_PATH = $(OPENWRT_DIR)/bin/targets/$(OPENWRT_TARGET1)/$(OPENWRT_TARGET2)
+$(OPENWRT_BIN): diffconfig
+	git clone --depth 1 https://git.openwrt.org/openwrt/openwrt.git
+	cd openwrt; git fetch --no-tags origin $(OPENWRT_TAG); git checkout $(OPENWRT_TAG)
+	cp diffconfig openwrt/.config
+	$(MAKE) -C openwrt defconfig
+	$(MAKE) -C openwrt download
+	$(MAKE) -C openwrt -j$(shell nproc)
+
+.PHONY: dirclean
+dirclean:
+	$(MAKE) -C openwrt dirclean
+
+.PHONY: distclean
+distclean:
+	$(MAKE) -C openwrt distclean
+
+.PHONY: clean
+clean:
+	$(MAKE) -C openwrt clean
 
 UNIFI_USER = ubnt
 UNIFI_PASS = ubnt
 UNIFI_BIN = ubnt-unifi-3.7.58.bin
-
-$(OPENWRT_BIN): $(OPENWRT_DIR)
-	$(MAKE) -C $(OPENWRT_DIR) \
-		image \
-		PROFILE=$(OPENWRT_PROFILE) \
-		PACKAGES="openssh-sftp-server perl perlbase-bytes perlbase-data perlbase-digest perlbase-essential perlbase-file perlbase-xsloader coreutils-nohup sqm-scripts -ppp -ppp-mod-pppoe -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only -opkg -swconfig -uclient-fetch" \
-		CONFIG_IPV6=n
-
-$(OPENWRT_DIR): $(OPENWRT_TAR)
-	tar x -Jf $(OPENWRT_TAR)
-
-$(OPENWRT_TAR):
-	wget -q https://github.com/mario-campos/openwrt-image/releases/download/$(OPENWRT_DIR)/$(OPENWRT_TAR)
-
-$(UNIFI_BIN):
-	wget -q https://github.com/mario-campos/openwrt-image/releases/download/ubnt-unifi-3-7-58-bin/$(UNIFI_BIN)
-
-.PHONY: distclean
-distclean:
-	$(MAKE) -C $(OPENWRT_DIR) clean
-
-.PHONY: clean
-clean:
-	rm -rf $(OPENWRT_TAR) $(OPENWRT_DIR)
 
 .PHONY: install
 install: $(OPENWRT_BIN) $(UNIFI_BIN)
@@ -46,3 +35,6 @@ install: $(OPENWRT_BIN) $(UNIFI_BIN)
 	echo mtd erase kernel1 | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST) ;\
 	echo 'dd bs=1 count=1 if=/dev/zero of=/dev/$$(awk "/bs/ { split(\$$0, a, \":\"); print a[1] }" </proc/mtd)' | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST) ;\
 	echo reboot | sshpass -e ssh $(UNIFI_USER)@$(UNIFI_HOST)
+
+$(UNIFI_BIN):
+	wget -q https://github.com/mario-campos/openwrt-image/releases/download/ubnt-unifi-3-7-58-bin/$(UNIFI_BIN)

@@ -1,0 +1,83 @@
+CONFIG_TARGET_ath79=y
+CONFIG_TARGET_ath79_generic=y
+CONFIG_TARGET_ath79_generic_DEVICE_ubnt_unifiac-lite=y
+# CONFIG_BUSYBOX_DEFAULT_FEATURE_IPV6 is not set
+CONFIG_DROPBEAR_ECC=y
+CONFIG_DROPBEAR_ECC_FULL=y
+CONFIG_DROPBEAR_ZLIB=y
+# CONFIG_IPV6 is not set
+# CONFIG_KERNEL_IPV6 is not set
+CONFIG_OPENSSL_ENGINE=y
+CONFIG_OPENSSL_PREFER_CHACHA_OVER_GCM=y
+CONFIG_OPENSSL_WITH_ASM=y
+CONFIG_OPENSSL_WITH_CHACHA_POLY1305=y
+CONFIG_OPENSSL_WITH_CMS=y
+CONFIG_OPENSSL_WITH_DEPRECATED=y
+CONFIG_OPENSSL_WITH_ERROR_MESSAGES=y
+CONFIG_OPENSSL_WITH_PSK=y
+CONFIG_OPENSSL_WITH_SRP=y
+CONFIG_OPENSSL_WITH_TLS13=y
+CONFIG_PACKAGE_coreutils=y
+CONFIG_PACKAGE_coreutils-nohup=y
+CONFIG_PACKAGE_iptables-mod-conntrack-extra=y
+CONFIG_PACKAGE_iptables-mod-ipopt=y
+CONFIG_PACKAGE_kmod-ifb=y
+CONFIG_PACKAGE_kmod-ipt-conntrack-extra=y
+CONFIG_PACKAGE_kmod-ipt-ipopt=y
+CONFIG_PACKAGE_kmod-ipt-raw=y
+# CONFIG_PACKAGE_kmod-lib-crc-ccitt is not set
+# CONFIG_PACKAGE_kmod-nf-ipt6 is not set
+# CONFIG_PACKAGE_kmod-ppp is not set
+CONFIG_PACKAGE_kmod-sched-cake=y
+CONFIG_PACKAGE_kmod-sched-core=y
+CONFIG_PACKAGE_libevent2=y
+# CONFIG_PACKAGE_libip6tc is not set
+CONFIG_PACKAGE_libmnl=y
+CONFIG_PACKAGE_libopenssl=y
+# CONFIG_PACKAGE_libuclient is not set
+CONFIG_PACKAGE_libunbound=y
+CONFIG_PACKAGE_libunbound_ipset=y
+CONFIG_PACKAGE_libunbound_libevent=y
+CONFIG_PACKAGE_libunbound_libpthread=y
+CONFIG_PACKAGE_openssh-sftp-server=y
+# CONFIG_PACKAGE_opkg is not set
+CONFIG_PACKAGE_perl=y
+CONFIG_PACKAGE_perlbase-base=y
+CONFIG_PACKAGE_perlbase-bytes=y
+CONFIG_PACKAGE_perlbase-class=y
+CONFIG_PACKAGE_perlbase-config=y
+CONFIG_PACKAGE_perlbase-cwd=y
+CONFIG_PACKAGE_perlbase-data=y
+CONFIG_PACKAGE_perlbase-digest=y
+CONFIG_PACKAGE_perlbase-dynaloader=y
+CONFIG_PACKAGE_perlbase-errno=y
+CONFIG_PACKAGE_perlbase-essential=y
+CONFIG_PACKAGE_perlbase-fcntl=y
+CONFIG_PACKAGE_perlbase-file=y
+CONFIG_PACKAGE_perlbase-filehandle=y
+CONFIG_PACKAGE_perlbase-i18n=y
+CONFIG_PACKAGE_perlbase-integer=y
+CONFIG_PACKAGE_perlbase-io=y
+CONFIG_PACKAGE_perlbase-list=y
+CONFIG_PACKAGE_perlbase-locale=y
+CONFIG_PACKAGE_perlbase-params=y
+CONFIG_PACKAGE_perlbase-posix=y
+CONFIG_PACKAGE_perlbase-re=y
+CONFIG_PACKAGE_perlbase-scalar=y
+CONFIG_PACKAGE_perlbase-selectsaver=y
+CONFIG_PACKAGE_perlbase-socket=y
+CONFIG_PACKAGE_perlbase-symbol=y
+CONFIG_PACKAGE_perlbase-tie=y
+CONFIG_PACKAGE_perlbase-unicore=y
+CONFIG_PACKAGE_perlbase-utf8=y
+CONFIG_PACKAGE_perlbase-xsloader=y
+# CONFIG_PACKAGE_ppp is not set
+CONFIG_PACKAGE_sqm-scripts=y
+# CONFIG_PACKAGE_swconfig is not set
+CONFIG_PACKAGE_tc-mod-iptables=y
+CONFIG_PACKAGE_tc-tiny=y
+# CONFIG_PACKAGE_uclient-fetch is not set
+CONFIG_PACKAGE_unbound-daemon=y
+CONFIG_PACKAGE_zlib=y
+CONFIG_PERL_NOCOMMENT=y
+CONFIG_PERL_THREADS=y

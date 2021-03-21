@@ -9,12 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - id: make
+      - run: |
+          sudo apt list --installed
+      - name: Install Dependencies
         run: |
-          make
-          echo "::set-output name=name::openwrt-img"
-          echo "::set-output name=path::$(find . -wholename '*/bin/*-sysupgrade.bin' -exec dirname \{\} \;)"
-      - uses: actions/upload-artifact@v2
-        with:
-          name: ${{ steps.make.outputs.name }}
-          path: ${{ steps.make.outputs.path }}
+          sudo apt update
+          sudo apt install \
+            ccache \
+            ecj \
+            fastjar \
+            gawk \
+            gettext \
+            java-propose-classpath \
+            libelf-dev \
+            libncurses5-dev \
+            libncursesw5-dev \
+            libssl-dev \
+            python3-distutils \
+            python3-setuptools \
+            xsltproc \
+            zlib1g-dev 
