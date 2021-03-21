@@ -1,4 +1,4 @@
-OPENWRT_TAG = v19.07.6
+OPENWRT_TAG = v19.07.7
 OPENWRT_BIN_FACTORY = openwrt/bin/targets/ath79/generic/*-factory.bin
 OPENWRT_BIN_UPGRADE = openwrt/bin/targets/ath79/generic/*-sysupgrade.bin
 
